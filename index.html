@@ -6,7 +6,7 @@
   <title>Valentine's Surprise</title>
   <style>
     body {
-      background: #ffe6e6;
+      background: linear-gradient(120deg, #ffe6e6, #ffb3cc);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -15,31 +15,31 @@
       font-family: 'Arial', sans-serif;
       color: #b30059;
       text-align: center;
-      overflow: hidden; /* prevents scrollbars during confetti */
+      overflow: hidden;
     }
 
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 50px;
+      font-size: 2.2em;
+      margin-bottom: 40px;
     }
 
     .heart-btn {
-      background: #ff4d94;
+      font-size: 3em; /* bigger heart */
+      padding: 25px 35px;
       border: none;
-      color: white;
-      padding: 20px 30px;
-      font-size: 2em;
       border-radius: 50%;
+      background: #ff4d94;
+      color: white;
       cursor: pointer;
       outline: none;
-      animation: pulse 1.5s infinite;
+      animation: pulse 1s infinite; /* faster pulse */
       position: relative;
       z-index: 1;
     }
 
     @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
+      50% { transform: scale(1.3); }
       100% { transform: scale(1); }
     }
 
@@ -55,14 +55,13 @@
   </style>
 </head>
 <body>
-  <h1>Click the Heart ❤️</h1>
+  <h1>Click the Heart for a Valentine Surprise! ❤️</h1>
   <button class="heart-btn" onclick="celebrate()">❤️</button>
   <canvas id="confetti"></canvas>
 
   <script>
     function celebrate() {
       launchConfetti();
-      // Wait 1 second before redirecting to the next page
       setTimeout(() => {
         window.location.href = "valentine.html";
       }, 1000);
@@ -74,7 +73,7 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      const confettiCount = 150;
+      const confettiCount = 100;
       const confetti = [];
 
       for (let i = 0; i < confettiCount; i++) {
@@ -86,19 +85,16 @@
           color: `hsl(${Math.random() * 360}, 70%, 60%)`,
           tilt: Math.random() * 10 - 10,
           tiltAngleIncrement: Math.random() * 0.07 + 0.05,
-          tiltAngle: 0
+          tiltAngle: 0,
+          emoji: '❤️'
         });
       }
 
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        confetti.forEach((c, i) => {
-          ctx.beginPath();
-          ctx.lineWidth = c.r / 2;
-          ctx.strokeStyle = c.color;
-          ctx.moveTo(c.x + c.tilt + c.r / 4, c.y);
-          ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r / 2);
-          ctx.stroke();
+        confetti.forEach(c => {
+          ctx.font = c.r * 2 + "px Arial";
+          ctx.fillText(c.emoji, c.x + c.tilt, c.y);
         });
         update();
       }
@@ -110,7 +106,6 @@
           c.tiltAngle += c.tiltAngleIncrement;
           c.y += (Math.cos(angle + c.d) + 3 + c.r / 2) / 2;
           c.tilt = Math.sin(c.tiltAngle) * 15;
-
           if (c.y > canvas.height) {
             c.y = -10;
             c.x = Math.random() * canvas.width;
@@ -119,7 +114,7 @@
       }
 
       const interval = setInterval(draw, 20);
-      setTimeout(() => clearInterval(interval), 1000); // stop after 1 second
+      setTimeout(() => clearInterval(interval), 1000);
     }
   </script>
 </body>
