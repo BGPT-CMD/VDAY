@@ -6,6 +6,15 @@
   <title>Valentine's Surprise</title>
   <style>
     body {
+  transition: opacity 1s ease; /* fade effect */
+  opacity: 1; /* default fully visible */
+}
+
+body.fade-out {
+  opacity: 0; /* fade out when triggered */
+}
+
+    body {
       background: linear-gradient(120deg, #ffe6e6, #ffb3cc);
       display: flex;
       flex-direction: column;
@@ -60,13 +69,18 @@
   <canvas id="confetti"></canvas>
 
   <script>
-    function celebrate() {
-      launchConfetti();
-      setTimeout(() => {
-        window.location.href = "valentine.html";
-      }, 1000);
-    }
-
+   function celebrate() {
+  // Start fade-out
+  document.body.classList.add('fade-out');
+  
+  // Launch confetti immediately
+  launchConfetti();
+  
+  // Wait 1 second for fade, then redirect
+  setTimeout(() => {
+    window.location.href = "valentine.html";
+  }, 1000);
+     
     function launchConfetti() {
       const canvas = document.getElementById('confetti');
       const ctx = canvas.getContext('2d');
