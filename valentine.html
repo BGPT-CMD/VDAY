@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Surprise</title>
+  <style>
+    body {
+      background: #ffe6e6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+      color: #b30059;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 50px;
+    }
+
+    .heart-btn {
+      background: #ff4d94;
+      border: none;
+      color: white;
+      padding: 20px 30px;
+      font-size: 1.5em;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .heart-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .heart-btn:active {
+      transform: scale(0.9);
+    }
+  </style>
+</head>
+<body>
+  <h1>Click the Heart ❤️</h1>
+  <button class="heart-btn" onclick="goToNextPage()">❤️</button>
+
+  <script>
+    function goToNextPage() {
+      window.location.href = "valentine.html";
+    }
+  </script>
+</body>
+</html>
