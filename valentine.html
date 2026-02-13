@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Valentine's Day</title>
   <style>
+
+    body {
+  opacity: 0; /* start invisible */
+  transition: opacity 1s ease;
+  /* keep all your existing styles */
+}
+
+body.fade-in {
+  opacity: 1; /* fade to fully visible */
+}
+
     body {
       margin: 0;
       padding: 0;
@@ -116,5 +127,11 @@
       canvas.height = window.innerHeight;
     });
   </script>
+  <script>
+  window.addEventListener('load', () => {
+    document.body.classList.add('fade-in');
+  });
+</script>
+
 </body>
 </html>
